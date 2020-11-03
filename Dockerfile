@@ -41,7 +41,8 @@ RUN apt-get update && \
         cmake \
         bzip2 \
         ca-certificates \
-        curl && \
+        curl \
+        parallel && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
