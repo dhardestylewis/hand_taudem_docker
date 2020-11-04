@@ -9,7 +9,9 @@ ENV MINICONDA3_VERSION latest
 ENV HAND_TAUDEM_VERSION master
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ARG CONDA_ENV=hand-taudem
+ARG CONDA_ENV_HAND=hand-taudem
+ARG CONDA_ENV_LIBGDAL=hand-libgdal
+ARG CONDA_ENV_RASTERIO=hand-rasterio
 ENV PATH /opt/conda/envs/${CONDA_ENV}/bin:/opt/conda/bin:/usr/local/taudem:$PATH
 
 RUN apt-get update && \
@@ -65,7 +67,11 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA3_VERSION}-Li
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-RUN wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAUDEM_VERSION}/env/environment.yml -O /opt/${CONDA_ENV}.yml && \
-    conda env create -f /opt/${CONDA_ENV}.yml && \
-    rm /opt/${CONDA_ENV}.yml
+RUN wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAUDEM_VERSION}/env/environment.yml -O /opt/${CONDA_ENV_HAND}.yml && \
+    wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAUDEM_VERSION}/env/env-${CONDA_ENV_LIBGDAL}.yml -O /opt/${CONDA_ENV_LIBGDAL}.yml && \
+    wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAUDEM_VERSION}/env/env-${CONDA_ENV_RASTERIO}.yml -O /opt/${CONDA_ENV_RASTERIO}.yml && \
+    conda env create -f /opt/${CONDA_ENV_HAND}.yml && \
+    conda env create -f /opt/${CONDA_ENV_LIBGDAL}.yml && \
+    conda env create -f /opt/${CONDA_ENV_RASTERIO}.yml && \
+    rm /opt/*.yml
 
