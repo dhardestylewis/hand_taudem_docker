@@ -17,6 +17,7 @@ ENV PATH /opt/conda/envs/${CONDA_ENV}/bin:/opt/conda/bin:/usr/local/taudem:$PATH
 RUN apt-get update && \
     apt-get install -y \
         build-essential \
+        gcc \
         g++ \
         gfortran \
         python3-all-dev \
@@ -74,4 +75,5 @@ RUN wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAU
     conda env create -f /opt/${CONDA_ENV_LIBGDAL}.yml && \
     conda env create -f /opt/${CONDA_ENV_RASTERIO}.yml && \
     rm /opt/*.yml
+    echo '. `which env_parallel.bash`' >> $HOME/.bashrc
 
