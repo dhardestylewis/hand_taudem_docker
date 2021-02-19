@@ -74,6 +74,6 @@ RUN wget https://raw.githubusercontent.com/dhardestylewis/HAND-TauDEM/${HAND_TAU
     conda env create -f /opt/${CONDA_ENV_HAND}.yml && \
     conda env create -f /opt/${CONDA_ENV_LIBGDAL}.yml && \
     conda env create -f /opt/${CONDA_ENV_RASTERIO}.yml && \
-    rm /opt/*.yml
+    rm /opt/*.yml && \
     echo '. `which env_parallel.bash`' >> $HOME/.bashrc
 
