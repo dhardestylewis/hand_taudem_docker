@@ -8,7 +8,7 @@ Stage: devel
 
 %environment
     # Point to MPICH binaries, libraries, man pages
-    export MPICH_DIR=/opt/mpich-3.2.1
+    export MPICH_DIR=/opt/mpich
     export PATH="$MPICH_DIR/bin:$PATH"
     export LD_LIBRARY_PATH="$MPICH_DIR/lib:$LD_LIBRARY_PATH"
     export MANPATH="$MPICH_DIR/share/man:$MANPATH"
@@ -35,5 +35,6 @@ Stage: devel
     export LD_LIBRARY_PATH=$MPICH_DIR/lib:$LD_LIBRARY_PATH
 
     echo "Compiling the MPI application..."
-    cd /opt && mpicc -o mpitest /opt/hand_taudem_docker.git/mpitest.c
+    cd /opt && wget https://raw.githubusercontent.com/dhardestylewis/hand_taudem_docker/main/mpitest.c
+    cd /opt && mpicc -o mpitest mpitest.c
 
